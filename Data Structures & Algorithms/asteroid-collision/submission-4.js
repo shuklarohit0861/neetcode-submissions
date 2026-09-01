@@ -1,0 +1,26 @@
+class Solution {
+    /**
+     * @param {number[]} asteroids
+     * @return {number[]}
+     */
+    asteroidCollision(asteroids) {
+        const stack = [];
+        for (let a of asteroids) {
+            while (stack.length && a < 0 && stack[stack.length - 1] > 0) {
+                let diff = stack[stack.length - 1] + a;
+                if (diff > 0) {
+                    a = 0;
+                } else if (diff < 0) {
+                    stack.pop();
+                } else {
+                    stack.pop();
+                    a = 0;
+                }
+            }
+            if (a) {
+                stack.push(a);
+            }
+        }
+        return stack;
+    }
+}
